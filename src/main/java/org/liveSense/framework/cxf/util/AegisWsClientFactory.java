@@ -1,14 +1,15 @@
 package org.liveSense.framework.cxf.util;
 
 import org.apache.cxf.BusFactory;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.apache.cxf.aegis.databinding.AegisDatabinding;
+import org.apache.cxf.frontend.ClientProxyFactoryBean;
 
 /**
  * Helper methods for initializing webservice clients.
  */
-public class JaxWsClientFactory {
+public class AegisWsClientFactory {
 
-    private JaxWsClientFactory() {
+    private AegisWsClientFactory() {
         // static methods only
     }
 
@@ -29,7 +30,7 @@ public class JaxWsClientFactory {
      * @return Port object
      */
     public static <T> T create(Class<T> pClass, String pPortUrl) {
-        return JaxWsClientFactory.create(pClass, pPortUrl, null, null);
+        return AegisWsClientFactory.create(pClass, pPortUrl, null, null);
     }
     
     /**
@@ -57,12 +58,14 @@ public class JaxWsClientFactory {
             // set classloader to CXF bundle class loader to avoid OSGI classloader problems
             Thread.currentThread().setContextClassLoader(BusFactory.class.getClassLoader());
 
-            JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean(new OsgiAwareJaxWsClientFactoryBean());
-            factory.setServiceClass(pClass);
+            ClientProxyFactoryBean factory = new ClientProxyFactoryBean(new OsgiAwareAegisWsClientFactoryBean());
             factory.setAddress(pPortUrl);
+            factory.getServiceFactory().setDataBinding(new AegisDatabinding());
+            factory.setServiceClass(pClass);
             factory.setUsername(pUsername);
             factory.setPassword(pPassword);
             return (T) factory.create();
+            
         }
         finally {
             Thread.currentThread().setContextClassLoader(oldClassLoader);

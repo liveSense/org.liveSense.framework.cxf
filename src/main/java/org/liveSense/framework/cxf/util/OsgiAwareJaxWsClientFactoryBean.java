@@ -9,7 +9,7 @@ import org.apache.cxf.jaxws.JaxWsClientFactoryBean;
  * {@link org.apache.cxf.endpoint.ClientImpl} objects to ensure correct
  * classloader usage in OSGI context.
  */
-class OsgiAwareClientFactoryBean extends JaxWsClientFactoryBean {
+class OsgiAwareJaxWsClientFactoryBean extends JaxWsClientFactoryBean {
 
     @Override
     protected Client createClient(Endpoint ep) {
