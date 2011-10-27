@@ -12,7 +12,7 @@
   </parent>
   <artifactId>org.liveSense.framework.cxf</artifactId>
   <packaging>bundle</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-2.4.2-SNAPSHOT</version>
 
   <name>liveSense CXF Framework</name>
 
