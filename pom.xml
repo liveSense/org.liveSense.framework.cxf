@@ -22,6 +22,12 @@
   </properties>
 
   <dependencies>
+    <!-- OSGi dependencies -->
+    <dependency>
+    	<groupId>org.osgi</groupId>
+        <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    
 
     <!-- Apache Sling Dependencies -->
     <dependency>
@@ -38,6 +44,10 @@
       <groupId>org.apache.sling</groupId>
       <artifactId>org.apache.sling.commons.osgi</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+       <groupId>org.apache.sling</groupId>
+       <artifactId>org.apache.sling.auth.core</artifactId>
     </dependency>
 
     <!-- Apache Felix Dependencies -->
