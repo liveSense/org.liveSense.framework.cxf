@@ -33,12 +33,13 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractWsServer extends CXFNonSpringServlet {
     private static final long serialVersionUID = 1L;
 
-	@Reference
+	@Reference(bind="bindAuth", unbind="unbindAuth")
 	AuthenticationSupport auth;
 
 	@Reference
 	PackageAdmin packageAdmin;
 
+	
     /**
      * Extension for SOAP requests
      */
@@ -184,4 +185,11 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
 		 return null;
 	}
 
+	protected void bindAuth(AuthenticationSupport auth) {
+		this.auth = auth;
+	}
+	
+	protected void unbindAuth(AuthenticationSupport auth) {
+		this.auth = null;
+	}
 }
