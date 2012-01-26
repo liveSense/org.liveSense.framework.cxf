@@ -18,6 +18,9 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.auth.core.AuthenticationSupport;
+import org.apache.sling.commons.classloader.DynamicClassLoader;
+import org.apache.sling.commons.classloader.DynamicClassLoaderManager;
+import org.apache.sling.commons.classloader.DynamicClassLoaderProvider;
 import org.osgi.framework.Bundle;
 import org.osgi.service.packageadmin.PackageAdmin;
 import org.slf4j.Logger;
@@ -34,12 +37,14 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
     private static final long serialVersionUID = 1L;
 
 	@Reference(bind="bindAuth", unbind="unbindAuth")
-	AuthenticationSupport auth;
+	AuthenticationSupport auth = null;
 
 	@Reference
 	PackageAdmin packageAdmin;
 
-	
+	@Reference
+	DynamicClassLoaderManager dynamicClassLoader = null;
+		
     /**
      * Extension for SOAP requests
      */
@@ -49,8 +54,9 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
 
 	public abstract void callFinal() throws Throwable;
 	
-	private HashMap<String, ClassLoader> classLoaders = new HashMap<String, ClassLoader>();
-
+	//private HashMap<String, ClassLoader> classLoaders = new HashMap<String, ClassLoader>();
+	private ClassLoader classLoader = null;
+	
    /**
     *
     * Allows the extending OSGi service to set its classloader.
@@ -58,10 +64,8 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
     * @param classLoader The classloader to provide to the SlingRemoteServiceServlet.
     */
    protected void setClassLoader(ClassLoader classLoader) {
-       //this.classLoader = classLoader;
-   	classLoaders.put(classLoader.toString(), classLoader);
+       this.classLoader = classLoader;
    }
-
    
    /*
 	
@@ -98,32 +102,19 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
         RequestContext.getThreadLocal().set(new RequestContext(pRequest, pResponse));
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
 
-        boolean osgiContext =false;
-
-        // Custom classloader - OSGi context
-        if (!classLoaders.isEmpty()) {
-        	osgiContext = true;
-        }
-
         try {
-        	if (osgiContext) {
-            	oldClassLoader = Thread.currentThread().getContextClassLoader();
-
-            	// set classloader to CXF bundle class loader to avoid OSGI classloader problems
-                //Thread.currentThread().setContextClassLoader(BusFactory.class.getClassLoader());
-                
-                // Generating composite classloader from map
-                CompositeClassLoader cClassLoader = new CompositeClassLoader();
-                cClassLoader.add(BusFactory.class.getClassLoader());
-                for (String key : classLoaders.keySet()) {
-                    cClassLoader.add(classLoaders.get(key));            	
-                }
-                
+        	if (classLoader != null) {
                 // Set contextClassLoader
-                Thread.currentThread().setContextClassLoader(cClassLoader);
-            }    
+            	Thread.currentThread().setContextClassLoader(classLoader);
+            } else {
+            	ClassLoader dcl = null;
+            	if (dynamicClassLoader != null) {
+            		dcl = dynamicClassLoader.getDynamicClassLoader();
+            	}
+            	Thread.currentThread().setContextClassLoader(dynamicClassLoader.getDynamicClassLoader());
+            }
             // Authenticating - OSGi context
-            if (osgiContext) {
+            if (auth != null) {
             	auth.handleSecurity(pRequest, pResponse);
             }
 
@@ -139,10 +130,8 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
         	} catch (Throwable e) {
             	log.error("callFinal: ", e);
         	}
-        	if (osgiContext) {
-            	Thread.currentThread().setContextClassLoader(oldClassLoader);
-                RequestContext.getThreadLocal().remove();        		
-        	}
+           	Thread.currentThread().setContextClassLoader(oldClassLoader);
+            RequestContext.getThreadLocal().remove();        		
         }
     }
 
