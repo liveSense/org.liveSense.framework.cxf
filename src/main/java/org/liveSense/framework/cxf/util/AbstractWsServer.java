@@ -117,11 +117,10 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
             if (auth != null) {
             	auth.handleSecurity(pRequest, pResponse);
             }
-
             try {
             	callInit();
             } catch (Throwable e) {
-            	log.error("callInit: ", e);
+            	throw new ServletException("Error on callInit", e);
 			}
             super.invoke(new RequestWrapper(pRequest), pResponse);
         } finally {
