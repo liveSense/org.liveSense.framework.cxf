@@ -2,9 +2,13 @@ package org.liveSense.framework.cxf.util;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.xml.XMLConstants;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.aegis.databinding.AegisDatabinding;
+import org.apache.cxf.aegis.type.XMLTypeCreator;
+import org.apache.cxf.binding.soap.SoapBinding;
 import org.apache.cxf.frontend.ServerFactoryBean;
 import org.apache.felix.scr.annotations.Component;
 
@@ -24,8 +28,8 @@ public abstract class AbstractAegisWsServer extends AbstractWsServer {
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
         try {
             // set classloader to CXF bundle class loader to avoid OSGI classloader problems
-            Thread.currentThread().setContextClassLoader(BusFactory.class.getClassLoader());
-
+          Thread.currentThread().setContextClassLoader(BusFactory.class.getClassLoader());
+                    	
             super.initCxfServlet(pServletConfig);
 
             ServerFactoryBean factory = new ServerFactoryBean();

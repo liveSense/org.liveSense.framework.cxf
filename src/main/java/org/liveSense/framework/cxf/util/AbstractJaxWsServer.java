@@ -24,8 +24,14 @@ public abstract class AbstractJaxWsServer extends AbstractWsServer {
     public void init(ServletConfig pServletConfig) throws ServletException {
         ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
         try {
-            // set classloader to CXF bundle class loader to avoid OSGI classloader problems
+            // set classloader to CXF bundle class loader to avoid OSGI classloader problems 
             Thread.currentThread().setContextClassLoader(BusFactory.class.getClassLoader());
+//        	CompositeClassLoader cl = new CompositeClassLoader();
+//        	cl.add(oldClassLoader);
+//        	if (getClassLoader() != null) cl.add(getClassLoader());
+//        	cl.add(BusFactory.class.getClassLoader());
+//        	cl.add(dynamicClassLoader.getDynamicClassLoader());
+//            Thread.currentThread().setContextClassLoader(cl); 
 
             super.initCxfServlet(pServletConfig);
             

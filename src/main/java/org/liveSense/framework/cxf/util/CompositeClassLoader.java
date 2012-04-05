@@ -1,5 +1,7 @@
 package org.liveSense.framework.cxf.util;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -50,6 +52,7 @@ public class CompositeClassLoader extends ClassLoader {
         }
     }
 
+    @Override
     public Class loadClass(String name) throws ClassNotFoundException {
         for (Iterator iterator = classLoaders.iterator(); iterator.hasNext();) {
             ClassLoader classLoader = (ClassLoader) iterator.next();
@@ -61,5 +64,26 @@ public class CompositeClassLoader extends ClassLoader {
         }
         throw new ClassNotFoundException(name);
     }
-
+    
+    @Override
+    public URL getResource(String name) {
+        for (Iterator iterator = classLoaders.iterator(); iterator.hasNext();) {
+            ClassLoader classLoader = (ClassLoader) iterator.next();
+            URL url = classLoader.getResource(name);
+            if (url != null) return url;
+        }
+        return null;
+    }
+    
+    @Override
+    public InputStream getResourceAsStream(String name) {
+        for (Iterator iterator = classLoaders.iterator(); iterator.hasNext();) {
+            ClassLoader classLoader = (ClassLoader) iterator.next();
+            InputStream is = classLoader.getResourceAsStream(name);
+            if (is != null) return is;
+        }
+        return null;
+    }
+    
+    
 }

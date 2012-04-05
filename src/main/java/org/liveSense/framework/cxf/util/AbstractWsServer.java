@@ -53,8 +53,7 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
 	public abstract void callInit() throws Throwable;
 
 	public abstract void callFinal() throws Throwable;
-	
-	//private HashMap<String, ClassLoader> classLoaders = new HashMap<String, ClassLoader>();
+
 	private ClassLoader classLoader = null;
 	
    /**
@@ -65,6 +64,10 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
     */
    protected void setClassLoader(ClassLoader classLoader) {
        this.classLoader = classLoader;
+   }
+   
+   protected ClassLoader getClassLoader() {
+	   return this.classLoader;
    }
    
    /*
@@ -110,8 +113,8 @@ public abstract class AbstractWsServer extends CXFNonSpringServlet {
             	ClassLoader dcl = null;
             	if (dynamicClassLoader != null) {
             		dcl = dynamicClassLoader.getDynamicClassLoader();
+                	Thread.currentThread().setContextClassLoader(dcl);
             	}
-            	Thread.currentThread().setContextClassLoader(dynamicClassLoader.getDynamicClassLoader());
             }
             // Authenticating - OSGi context
             if (auth != null) {
