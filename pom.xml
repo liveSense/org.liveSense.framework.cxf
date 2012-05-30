@@ -13,7 +13,7 @@
   <artifactId>org.liveSense.framework.cxf</artifactId>
   <packaging>bundle</packaging>
   <version>2.5.2_1-SNAPSHOT</version>
-  <name>liveSense CXF Framework</name>
+  <name>liveSense :: Framework :: Apache CXF</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
