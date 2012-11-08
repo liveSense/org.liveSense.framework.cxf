@@ -1,7 +1,9 @@
 # [liveSense :: Framework :: Apache CXF - org.liveSense.framework.cxf](http://github.com/liveSense/org.liveSense.framework.cxf)
+
 ## Description
 liveSense CXF Framework. Apache CXF is an open source services framework. CXF helps you build and develop services using frontend programming APIs, like JAX-WS and JAX-RS. These services can speak a variety of protocols such as SOAP, XML/HTTP, RESTful HTTP, or CORBA and work over a variety of transports such as HTTP, JMS or JBI.
-## Exported packages
+
+## OSGi Exported packages
 * javax.ws.rs(2.0.0)
 * javax.ws.rs.client(2.0.0)
 * javax.ws.rs.container(2.0.0)
@@ -199,7 +201,8 @@ liveSense CXF Framework. Apache CXF is an open source services framework. CXF he
 * org.apache.cxf.wsdl(2.7.0.SNAPSHOT)
 * org.apache.cxf.wsdl.http(2.7.0.SNAPSHOT)
 * org.apache.cxf.wsdl11(2.7.0.SNAPSHOT)
-## Dependencies
+
+## OSGi Dependencies
 * __System Bundle - org.apache.felix.framework (3.0.8)__
 	* javax.activation
 	* javax.annotation
@@ -249,33 +252,10 @@ liveSense CXF Framework. Apache CXF is an open source services framework. CXF he
 	* org.xml.sax
 	* org.xml.sax.ext
 	* org.xml.sax.helpers
-* __Apache Felix Http Jetty - org.apache.felix.http.jetty (2.2.0)__
-	* javax.servlet
-	* javax.servlet.http
-* __Apache ServiceMix Bundles: cglib-2.1_3 - org.apache.servicemix.bundles.cglib (2.1.0.3_4)__
-	* net.sf.cglib.proxy
-* __slf4j-api - slf4j.api (1.6.1)__
-	* org.slf4j
-	* org.slf4j.helpers
-	* org.slf4j.spi
-* __Apache ServiceMix :: Bundles :: xercesImpl - org.apache.servicemix.bundles.xerces (2.9.1.5)__
-	* org.apache.xerces.dom
-	* org.apache.xerces.parsers
-* __Commons Lang - org.apache.commons.lang (2.5)__
-	* org.apache.commons.lang
-	* org.apache.commons.lang.builder
-* __Spring Beans - org.springframework.beans (3.0.5.RELEASE)__
-	* org.springframework.beans
-	* org.springframework.beans.factory
-	* org.springframework.beans.factory.config
-	* org.springframework.beans.factory.support
-	* org.springframework.beans.factory.wiring
-	* org.springframework.beans.factory.xml
-* __Apache Felix Configuration Admin Service - org.apache.felix.configadmin (1.2.8)__
-	* org.osgi.service.cm
-* __javax.mail API v.1.4 - org.glassfish.javax.mail (3.0.0.Preview)__
-	* javax.mail
-	* javax.mail.internet
+* __Spring AOP - org.springframework.aop (3.0.5.RELEASE)__
+	* org.springframework.aop
+	* org.springframework.aop.framework
+	* org.springframework.aop.support
 * __Apache MINA Core - org.apache.mina.core (2.0.4)__
 	* org.apache.mina.core.buffer
 	* org.apache.mina.core.filterchain
@@ -293,9 +273,62 @@ liveSense CXF Framework. Apache CXF is an open source services framework. CXF he
 	* org.springframework.core
 	* org.springframework.core.io
 	* org.springframework.core.io.support
-* __Spring AOP - org.springframework.aop (3.0.5.RELEASE)__
-	* org.springframework.aop
-	* org.springframework.aop.framework
-	* org.springframework.aop.support
-## Embedded JARs
-* cxf-rt-frontend-jaxws-2.7.0.jar* xml-resolver-1.2.jar* asm-3.3.1.jar* cxf-api-2.7.0.jar* woodstox-core-asl-4.1.4.jar* stax2-api-3.1.1.jar* cxf-rt-core-2.7.0.jar* cxf-rt-bindings-soap-2.7.0.jar* cxf-rt-databinding-jaxb-2.7.0.jar* cxf-rt-bindings-xml-2.7.0.jar* cxf-rt-frontend-simple-2.7.0.jar* cxf-rt-ws-addr-2.7.0.jar* cxf-rt-ws-policy-2.7.0.jar* neethi-3.0.2.jar* cxf-rt-frontend-jaxrs-2.7.0.jar* javax.ws.rs-api-2.0-m10.jar* cxf-rt-databinding-aegis-2.7.0.jar* jdom-1.1.jar* cxf-rt-transports-http-2.7.0.jar* cxf-tools-common-2.7.0.jar* wsdl4j-1.6.2.jar* jaxb-impl-2.1.13.jar* cxf-tools-validator-2.7.0.jar* xmlschema-core-2.0.3.jar* slf4j-simple-1.6.1.jar* log4j-over-slf4j-1.6.1.jar* jcl-over-slf4j-1.6.1.jar
+* __Commons Lang - org.apache.commons.lang (2.5)__
+	* org.apache.commons.lang
+	* org.apache.commons.lang.builder
+* __Spring Beans - org.springframework.beans (3.0.5.RELEASE)__
+	* org.springframework.beans
+	* org.springframework.beans.factory
+	* org.springframework.beans.factory.config
+	* org.springframework.beans.factory.support
+	* org.springframework.beans.factory.wiring
+	* org.springframework.beans.factory.xml
+* __Apache Felix Http Jetty - org.apache.felix.http.jetty (2.2.0)__
+	* javax.servlet
+	* javax.servlet.http
+* __Apache ServiceMix Bundles: cglib-2.1_3 - org.apache.servicemix.bundles.cglib (2.1.0.3_4)__
+	* net.sf.cglib.proxy
+* __Apache Felix Configuration Admin Service - org.apache.felix.configadmin (1.2.8)__
+	* org.osgi.service.cm
+* __javax.mail API v.1.4 - org.glassfish.javax.mail (3.0.0.Preview)__
+	* javax.mail
+	* javax.mail.internet
+* __slf4j-api - slf4j.api (1.6.1)__
+	* org.slf4j
+	* org.slf4j.helpers
+	* org.slf4j.spi
+* __Apache ServiceMix :: Bundles :: xercesImpl - org.apache.servicemix.bundles.xerces (2.9.1.5)__
+	* org.apache.xerces.dom
+	* org.apache.xerces.parsers
+
+## OSGi Embedded JARs
+* cxf-rt-frontend-jaxws-2.7.0.jar
+* xml-resolver-1.2.jar
+* asm-3.3.1.jar
+* cxf-api-2.7.0.jar
+* woodstox-core-asl-4.1.4.jar
+* stax2-api-3.1.1.jar
+* cxf-rt-core-2.7.0.jar
+* cxf-rt-bindings-soap-2.7.0.jar
+* cxf-rt-databinding-jaxb-2.7.0.jar
+* cxf-rt-bindings-xml-2.7.0.jar
+* cxf-rt-frontend-simple-2.7.0.jar
+* cxf-rt-ws-addr-2.7.0.jar
+* cxf-rt-ws-policy-2.7.0.jar
+* neethi-3.0.2.jar
+* cxf-rt-frontend-jaxrs-2.7.0.jar
+* javax.ws.rs-api-2.0-m10.jar
+* cxf-rt-databinding-aegis-2.7.0.jar
+* jdom-1.1.jar
+* cxf-rt-transports-http-2.7.0.jar
+* cxf-tools-common-2.7.0.jar
+* wsdl4j-1.6.2.jar
+* jaxb-impl-2.2.5.jar
+* cxf-tools-validator-2.7.0.jar
+* xmlschema-core-2.0.3.jar
+* slf4j-simple-1.6.1.jar
+* log4j-over-slf4j-1.6.1.jar
+* jcl-over-slf4j-1.6.1.jar
+
+## Dependency Graph
+![alt text](http://raw.github.com.everydayimmirror.in/liveSense/org.liveSense.framework.cxf/master/osgidependencies.svg "")
