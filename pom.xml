@@ -18,7 +18,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<apache-cxf-version>${cxf.version}</apache-cxf-version>
+<!--		<apache-cxf-version>${cxf.version}</apache-cxf-version> -->
+        <apache-cxf-version>2.6.3</apache-cxf-version>
 	</properties>
 
 	<dependencies>
@@ -77,6 +78,22 @@
 					<groupId>com.sun.xml.bind</groupId>
 					<artifactId>jaxb-impl</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>xml-resolver</artifactId>
+					<groupId>xml-resolver</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xmlschema-core</artifactId>
+					<groupId>org.apache.ws.xmlschema</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>wsdl4j</artifactId>
+					<groupId>wsdl4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>neethi</artifactId>
+					<groupId>org.apache.neethi</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -90,6 +107,10 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-core</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>javax.ws.rs-api</artifactId>
+					<groupId>javax.ws.rs</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -98,38 +119,6 @@
 			<artifactId>cxf-rt-databinding-aegis</artifactId>
 			<version>${apache-cxf-version}</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.1</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xmlParserAPIs</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jdom</groupId>
-					<artifactId>jaxen-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jdom</groupId>
-					<artifactId>jaxen-jdom</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jdom</groupId>
-					<artifactId>saxpath</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xalan</groupId>
-					<artifactId>xalan</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -191,6 +180,14 @@
 					<groupId>org.apache.velocity</groupId>
 					<artifactId>velocity</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>jaxb-impl</artifactId>
+					<groupId>com.sun.xml.bind</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>wsdl4j</artifactId>
+					<groupId>wsdl4j</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -206,6 +203,18 @@
 				<exclusion>
 					<groupId>org.apache.velocity</groupId>
 					<artifactId>velocity</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xmlschema-core</artifactId>
+					<groupId>org.apache.ws.xmlschema</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jaxb-impl</artifactId>
+					<groupId>com.sun.xml.bind</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>wsdl4j</artifactId>
+					<groupId>wsdl4j</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -227,21 +236,17 @@
 
 						<!-- Do not inline jars, include as jar files -->
 						<!-- There are config files with same name will be overwritten -->
-						<Embed-Dependency>*;scope=compile|runtime;inline=false</Embed-Dependency>
+						<Embed-Dependency>*;scope=compile;inline=false</Embed-Dependency>
 						<Embed-Transitive>true</Embed-Transitive>
 
 						<_exportcontents>
 							org.apache.cxf.*;version=${project.version},
-							javax.ws.rs.*;version=2.0
 						</_exportcontents>
 
 						<!-- declare optional dependencies -->
 						<Import-Package>
-							com.sun.msv.*;resolution:=optional,
-							com.sun.xml.fastinfoset.stax.*;resolution:=optional,
 							net.sf.cglib.*;resolution:=optional,
 							org.apache.aries.*;resolution:=optional,
-							org.apache.axiom.*;resolution:=optional,
 							org.apache.mina.*;resolution:=optional,
 							org.apache.log4j.spi.*;resolution:=optional,
 							org.osgi.service.blueprint.*;resolution:=optional,
@@ -251,17 +256,10 @@
 							javax.mail.*;resolution:=optional,
 							javax.xml.ws.spi.http.*;resolution:=optional,
 							junit.framework.*;resolution:=optional,
-							org.apache.xerces.dom.*;resolution:=optional,
-							org.apache.xerces.parsers.*;resolution:=optional,
 							com.sun.tools.xjc.*;resolution:=optional,
 							org.apache.log4j.spi.*;resolution:=optional,
 							javax.servlet.descriptor.*;resolution:=optional,
-							org.jaxen.*;resolution:=optional,
-							oracle.xml.parser.*;resolution:=optional,
 							com.sun.xml.fastinfoset.sax.*;resolution:=optional,
-							org.jvnet.fastinfoset.*;resolution:=optional,
-							org.jvnet.staxex.*;resolution:=optional,
-							org.relaxng.datatype.*;resolution:=optional,
 							org.apache.velocity.*;resolution:=optional,
 							*
 						</Import-Package>
