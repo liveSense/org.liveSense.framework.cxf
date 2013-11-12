@@ -7,11 +7,11 @@
 		<groupId>com.github.livesense</groupId>
 		<artifactId>org.liveSense.parent</artifactId>
 		<version>2-SNAPSHOT</version>
-		<relativePath>../org.liveSense.parent</relativePath>
+		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>org.liveSense.framework.cxf</artifactId>
 	<packaging>bundle</packaging>
-	<version>${cxf.version}_1-SNAPSHOT</version>
+	<version>2.6.3_1-SNAPSHOT</version>
 	<name>liveSense :: Framework :: Apache CXF</name>
     <description>liveSense CXF Framework. Apache CXF is an open source services framework. CXF helps you build and develop services using frontend programming APIs, like JAX-WS and JAX-RS. These services can speak a variety of protocols such as SOAP, XML/HTTP, RESTful HTTP, or CORBA and work over a variety of transports such as HTTP, JMS or JBI.
     </description>
