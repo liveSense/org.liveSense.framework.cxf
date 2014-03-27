@@ -9,6 +9,11 @@
 		<version>2-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
+	<scm>
+		<connection>scm:git:https://github.com/liveSense/org.liveSense.framework.cxf.git</connection>
+		<developerConnection>scm:git:https://github.com/liveSense/org.liveSense.framework.cxf.git</developerConnection>
+		<url>https://github.com/liveSense/org.liveSense.framework.cxf</url>
+	</scm>
 	<artifactId>org.liveSense.framework.cxf</artifactId>
 	<packaging>bundle</packaging>
 	<version>2.6.3_1-SNAPSHOT</version>
